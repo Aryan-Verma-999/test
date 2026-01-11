@@ -13,11 +13,16 @@ WORKDIR /app
 COPY package.json bun.lock bun.lockb ./
 COPY packages ./packages
 COPY config.json ./
+COPY tsconfig.base.json tsconfig.json turbo.json ./
 
 # Install dependencies (this will link workspaces properly)
 RUN HUSKY=0 bun install --frozen-lockfile
+
+# Build all packages (compiles TypeScript to dist/)
+RUN bun run build
 
 EXPOSE 8080/tcp
 
 # Run the homeserver package
 CMD ["bun", "run", "packages/homeserver/src/index.ts"]
+
