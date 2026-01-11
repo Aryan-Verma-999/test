@@ -1,0 +1,25 @@
+{
+	"name": "@rocket.chat/federation-crypto",
+	"version": "0.0.1",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "bun run --watch src/index.ts",
+		"build": "tsc --build --force"
+	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.js"
+		}
+	},
+	"dependencies": {
+		"@noble/ed25519": "^3.0.0"
+	},
+	"devDependencies": {
+		"bun-types": "latest"
+	},
+	"files": ["src", "dist"]
+}

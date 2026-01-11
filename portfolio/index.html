@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryan Verma | Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+            color: #fff;
+            overflow: hidden;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00d4ff, #9b59b6, #ff6b6b);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s ease infinite;
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes gradient {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            color: #a0a0c0;
+            margin-bottom: 2rem;
+        }
+        
+        .coming-soon {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border: 2px solid #00d4ff;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            color: #00d4ff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 212, 255, 0.6); }
+        }
+        
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            z-index: 0;
+        }
+        
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: #9b59b6;
+            top: -100px;
+            left: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: #00d4ff;
+            bottom: -50px;
+            right: -50px;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="container">
+        <h1>Aryan Verma</h1>
+        <p class="tagline">Developer & Creator</p>
+        <span class="coming-soon">Portfolio Coming Soon</span>
+    </div>
+</body>
+</html>

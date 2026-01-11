@@ -1,0 +1,8 @@
+{
+	"name": "chat.aryanverma.dev",
+	"version": "1.0",
+	"port": 8080,
+	"key": {
+		"key_refresh_interval": 60
+	}
+}

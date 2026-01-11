@@ -1,0 +1,78 @@
+{
+	"version": "2.0.0",
+	"inputs": [
+		{
+			"id": "test-name",
+			"description": "name of test",
+			"type": "promptString"
+		}
+	],
+	"tasks": [
+		{
+			"type": "bun",
+			"script": "bun run --inspect-wait=localhost:6499/ ${workspaceFolder}/index.ts",
+			"options": {
+				"env": {
+					"NODE_TLS_REJECT_UNAUTHORIZED": "0",
+					"SERVER_NAME": "rc1.tunnel.dev.rocket.chat",
+					"SERVER_PORT": "8448",
+					"SERVER_BASE_URL": "https://localhost:8448",
+					"MATRIX_DOMAIN": "rc1.tunnel.dev.rocket.chat",
+					"MATRIX_SERVER_NAME": "rc1.tunnel.dev.rocket.chat",
+				}
+			},
+			"label": "bun: start",
+			"detail": "start debugger",
+			"isBackground": true,
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"problemMatcher": [
+				{
+					"pattern": [
+						{
+							"regexp": ".",
+							"file": 1,
+							"location": 2,
+							"message": 3
+						}
+					],
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": ".",
+						"endsPattern": ".",
+					}
+				}
+			]
+		},
+		{
+			"type": "bun",
+			"script": "bun test --inspect-wait=localhost:6499/ ${file} -t ${input:test-name}",
+			"label": "bun: test",
+			"detail": "start debugger",
+			"isBackground": true,
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"problemMatcher": [
+				{
+					"pattern": [
+						{
+							"regexp": ".",
+							"file": 1,
+							"location": 2,
+							"message": 3
+						}
+					],
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": ".",
+						"endsPattern": ".",
+					}
+				}
+			]
+		}
+	]
+}

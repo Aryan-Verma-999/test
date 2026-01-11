@@ -1,0 +1,9 @@
+server {
+    server_name aryanverma.dev www.aryanverma.dev;
+    root /var/www/portfolio;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

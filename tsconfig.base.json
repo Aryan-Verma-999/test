@@ -1,0 +1,63 @@
+{
+	"compilerOptions": {
+		"incremental": true,
+		// Enable latest features
+		"lib": [
+			"ESNext"
+		],
+		// "target": "ESNext",
+		"target": "es2018", // same as rocket.chat
+		"module": "ESNext",
+		"moduleDetection": "force",
+		"allowJs": true,
+		"composite": true,
+		// Bundler mode
+		"moduleResolution": "bundler",
+		"verbatimModuleSyntax": true,
+		// Best practices
+		"strict": true,
+		"skipLibCheck": true,
+		"noFallthroughCasesInSwitch": true,
+		"forceConsistentCasingInFileNames": true,
+		// Some stricter flags (disabled by default)
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
+		"noPropertyAccessFromIndexSignature": false,
+		// For tsyringe
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		// Build output
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
+		"esModuleInterop": true,
+		"allowImportingTsExtensions": false,
+		"tsBuildInfoFile": ".tsbuildinfo",
+		// Monorepo configuration
+		"baseUrl": ".",
+		"paths": {
+			"@rocket.chat/federation-core/*": [
+				"packages/core/src/*"
+			],
+			"@rocket.chat/federation-crypto/*": [
+				"packages/crypto/src/*"
+			],
+			"@rocket.chat/federation-sdk/*": [
+				"packages/federation-sdk/src/*"
+			],
+			"@rocket.chat/homeserver/*": [
+				"packages/homeserver/src/*"
+			],
+			"@rocket.chat/federation-room/*": [
+				"packages/room/src/*"
+			]
+		}
+	},
+	"exclude": [
+		"node_modules",
+		"dist",
+		"**/*.spec.ts",
+		"**/*.test.ts"
+	]
+}
