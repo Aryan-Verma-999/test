@@ -5,3 +5,21 @@ services:
       - "8080:8080"
     restart: unless-stopped
     container_name: homeserver
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/matrix
+      - SERVER_NAME=chat.aryanverma.dev
+      - SERVER_PORT=8080
+      - MATRIX_DOMAIN=chat.aryanverma.dev
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:7
+    container_name: mongo
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+
