@@ -2,17 +2,6 @@
 # see all versions at https://hub.docker.com/r/oven/bun/tags
 FROM oven/bun:1-debian AS base
 
-WORKDIR /app
-
-# Install dependencies
-FROM base AS install
-COPY package.json bun.lock bun.lockb ./
-COPY packages ./packages
-RUN HUSKY=0 bun install --frozen-lockfile
-
-# Production image
-FROM base AS release
-
 RUN apt-get update && apt-get install -y \
 	ca-certificates \
 	curl \
@@ -20,14 +9,15 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# Copy installed node_modules and source
-COPY --from=install /app/node_modules ./node_modules
-COPY --from=install /app/packages ./packages
+# Copy everything
 COPY package.json bun.lock bun.lockb ./
+COPY packages ./packages
 COPY config.json ./
+
+# Install dependencies (this will link workspaces properly)
+RUN HUSKY=0 bun install --frozen-lockfile
 
 EXPOSE 8080/tcp
 
 # Run the homeserver package
-CMD ["bun", "run", "--cwd", "packages/homeserver", "dev"]
-
+CMD ["bun", "run", "packages/homeserver/src/index.ts"]
