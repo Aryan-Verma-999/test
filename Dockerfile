@@ -2,31 +2,32 @@
 # see all versions at https://hub.docker.com/r/oven/bun/tags
 FROM oven/bun:1-debian AS base
 
-# install dependencies into temp directory
-# this will cache them and speed up future builds
+WORKDIR /app
+
+# Install dependencies
 FROM base AS install
-RUN mkdir -p /temp/dev
-COPY . /temp/dev/
-RUN cd /temp/dev && HUSKY=0 bun install --frozen-lockfile
+COPY package.json bun.lock bun.lockb ./
+COPY packages ./packages
+RUN HUSKY=0 bun install --frozen-lockfile
 
-# install with --production (exclude devDependencies)
-RUN bun build /temp/dev/index.ts --compile --outfile /temp/dev/bin/app
-
-# copy production dependencies and source code into final image
+# Production image
 FROM base AS release
 
 RUN apt-get update && apt-get install -y \
 	ca-certificates \
-	curl
+	curl \
+	&& rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy installed node_modules and source
+COPY --from=install /app/node_modules ./node_modules
+COPY --from=install /app/packages ./packages
+COPY package.json bun.lock bun.lockb ./
+COPY config.json ./
 
 EXPOSE 8080/tcp
 
-# run the app
-# USER bun
+# Run the homeserver package
+CMD ["bun", "run", "--cwd", "packages/homeserver", "dev"]
 
-WORKDIR /usr/src/app
-
-COPY --from=install /temp/dev/bin/app .
-COPY --from=install /temp/dev/config.json .
-
-CMD [ "./app" ]
